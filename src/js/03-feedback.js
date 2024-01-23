@@ -20,6 +20,7 @@ function onLoadPage() {
     inputForm.value = parseLocalValue.email;
     if (parseLocalValue.message) {
       areaForm.value = parseLocalValue.message;
+      console.log();
     }
   }
 }
