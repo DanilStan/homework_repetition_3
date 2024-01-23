@@ -6,6 +6,7 @@ const areaForm = document.querySelector('textarea');
 let emptyObject = {};
 
 form.addEventListener('input', throttle(onFormInput, 500));
+form.addEventListener('submit', onSubmitForm);
 onLoadPage();
 
 function onFormInput(event) {
@@ -15,12 +16,28 @@ function onFormInput(event) {
 
 function onLoadPage() {
   const localValue = localStorage.getItem('feedback-form-state');
-  const parseLocalValue = JSON.parse(localValue);
-  if (parseLocalValue.email) {
-    inputForm.value = parseLocalValue.email;
-    if (parseLocalValue.message) {
-      areaForm.value = parseLocalValue.message;
-      console.log();
+  if (localValue) {
+    const parseLocalValue = JSON.parse(localValue);
+    if (parseLocalValue.email) {
+      inputForm.value = parseLocalValue.email;
+      if (parseLocalValue.message) {
+        areaForm.value = parseLocalValue.message;
+      }
+    }
+    if (parseLocalValue.email) {
+      inputForm.value = parseLocalValue.email;
+      if (parseLocalValue.message) {
+        areaForm.value = parseLocalValue.message;
+      }
     }
   }
+  // console.log(parseLocalValue.email);
+}
+
+function onSubmitForm(event) {
+  event.preventDefault();
+  console.log(emptyObject);
+  areaForm.value = '';
+  inputForm.value = '';
+  localStorage.removeItem('feedback-form-state');
 }
